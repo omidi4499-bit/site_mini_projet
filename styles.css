@@ -1,0 +1,378 @@
+﻿:root {
+  --bg-start: #f5edd5;
+  --bg-end: #def3ef;
+  --ink: #1a2228;
+  --ink-soft: #425061;
+  --panel: rgba(255, 255, 255, 0.8);
+  --line: rgba(26, 34, 40, 0.15);
+  --accent: #0f7c6d;
+  --accent-2: #d05c24;
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 5% 10%, rgba(15, 124, 109, 0.16), transparent 32%),
+    radial-gradient(circle at 95% 0%, rgba(208, 92, 36, 0.14), transparent 38%),
+    linear-gradient(140deg, var(--bg-start), var(--bg-end));
+}
+
+.app {
+  width: min(1100px, 100% - 2rem);
+  margin: 2rem auto 3rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#measureView {
+  display: grid;
+  gap: 1rem;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 32px rgba(24, 32, 39, 0.08);
+  backdrop-filter: blur(8px);
+  padding: 1.15rem;
+}
+
+.welcome {
+  max-width: 880px;
+  margin: 2vh auto;
+}
+
+.welcome h1,
+.hero h1 {
+  margin: 0.45rem 0;
+  line-height: 1.1;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+}
+
+.welcome-text,
+.hero p {
+  margin: 0.2rem 0 0;
+  color: var(--ink-soft);
+}
+
+.tips {\r\n  margin-top: 1rem;\r\n}\r\n\r\n.tips h2 {\r\n  margin: 0.6rem 0 0.4rem;\r\n  font-size: 1rem;\r\n}\r\n\r\n.welcome-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.1rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.welcome-list li {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.67);
+  border-radius: 11px;
+  padding: 0.6rem 0.75rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.85rem;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.8rem;
+}
+
+.photo-block {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.field-title {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.file-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.68rem 0.95rem;
+  border-radius: 999px;
+  border: 1px dashed var(--line);
+  background: rgba(255, 255, 255, 0.7);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.file-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(26, 34, 40, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.file-btn input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 500;
+}
+
+input[type="number"],
+input[type="text"],
+input[type="file"],
+select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+input[readonly] {
+  background: rgba(241, 247, 246, 0.95);
+}
+
+.actions {\r\n  margin-top: 0.85rem;\r\n  display: flex;\r\n  gap: 0.6rem;\r\n  flex-wrap: wrap;\r\n}\r\n\r\n.actions .btn {\r\n  flex: 1;\r\n}\r\n\r\n.mode-buttons {
+  margin-top: 0.9rem;
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.62rem 0.95rem;
+  background: var(--ink);
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: transform 140ms ease, opacity 140ms ease, background-color 180ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.93;
+}
+
+.btn.active {
+  background: var(--accent);
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.btn.accent {
+  margin-top: 0.8rem;
+  width: 100%;
+  background: var(--accent-2);
+}
+
+.btn:disabled {
+  opacity: 0.68;
+  cursor: wait;
+}
+
+.help {
+  margin: 0.65rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.canvas-wrap {
+  position: relative;
+  width: 100%;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(120deg, rgba(15, 124, 109, 0.07), rgba(208, 92, 36, 0.08));
+}
+
+#measureCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 68vh;
+  cursor: crosshair;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--ink-soft);
+  font-weight: 500;
+  text-align: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.status {
+  margin: 0 0 0.8rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.8rem;
+  margin: 0;
+}
+
+.results-grid div {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.results-grid dt {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+.results-grid dd {
+  margin: 0.35rem 0 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.note {
+  color: var(--ink-soft);
+  margin: 0.8rem 0 0;
+  font-size: 0.9rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: reveal-up 500ms ease forwards;
+}
+
+.reveal:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.reveal:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.reveal:nth-child(4) {
+  animation-delay: 210ms;
+}
+
+@keyframes reveal-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .app {
+    width: min(1100px, 100% - 1rem);
+    margin-top: 1rem;
+  }
+
+  .panel {
+    padding: 0.88rem;
+    border-radius: 14px;
+  }
+
+  .btn,
+  .btn.secondary {
+    width: 100%;
+  }
+
+  .welcome-list li {
+    font-size: 0.8rem;
+  }
+}
+
+
+
+
+.camera-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(24, 32, 39, 0.55);
+  display: grid;
+  place-items: center;
+  z-index: 20;
+}
+
+.camera-card {
+  width: min(720px, 92vw);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: grid;
+  gap: 0.85rem;
+  box-shadow: 0 18px 36px rgba(24, 32, 39, 0.2);
+}
+
+.camera-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.camera-header h3 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+#cameraVideo {
+  width: 100%;
+  border-radius: 12px;
+  background: #111;
+}
+
+.camera-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.camera-actions .btn {
+  flex: 1;
+}

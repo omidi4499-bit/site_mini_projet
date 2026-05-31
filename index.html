@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mesure d'objet par photo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <section id="welcomeView" class="panel welcome reveal">
+      <p class="eyebrow">Laboratoire de vision</p>
+      <h1>Mesure d'objet par photo</h1>
+      <p class="welcome-text">
+        Projet academique a vocation professionnelle. L'estimation se base sur l'analyse de l'image
+        pour fournir des dimensions proches de la realite.
+      </p>
+
+      <div class="tips">
+        <h2>Conseils pour une photo fiable</h2>
+        <ul class="welcome-list">
+          <li>Place l'objet sur une surface plane, sans relief inutile.</li>
+          <li>Prends la photo au niveau de l'objet avec un angle le plus frontal possible.</li>
+          <li>Assure une bonne lumiere, evite les ombres dures et les reflets.</li>
+          <li>Pour que la mesure soit fiable, la reference doit etre sur le meme plan que l'objet.</li>
+        </ul>
+      </div>
+
+      <button id="startBtn" class="btn accent">Demarrer la mesure</button>
+    </section>
+
+    <div id="measureView" class="hidden">
+      <header class="panel hero reveal">
+        <p class="eyebrow">Mesure active</p>
+        <h1>Estimation des dimensions</h1>
+        <p>
+          Selectionne une image, choisis la reference, puis place les points de mesure.
+        </p>
+      </header>
+
+      <section class="panel controls reveal">
+        <div class="control-grid">
+          <div class="photo-block">
+            <p class="field-title">Image principale</p>
+            <label class="file-btn">
+              <input type="file" id="imageInput" accept="image/*" />
+              <span>Choisir une image</span>
+            </label>
+            <button id="openCameraBtn" class="btn secondary" type="button">Ouvrir la camera</button>
+          </div>
+
+          <label>
+            Reference
+            <select id="referenceSelect">
+              <option value="card_w" selected>Carte bancaire (largeur)</option>
+              <option value="card_h">Carte bancaire (longueur)</option>
+              <option value="a4_w">Feuille A4 (largeur)</option>
+              <option value="a4_h">Feuille A4 (longueur)</option>
+              <option value="a5_w">Feuille A5 (largeur)</option>
+              <option value="a5_h">Feuille A5 (longueur)</option>
+              <option value="coin_2dh">Piece 2 DH (diametre)</option>
+              <option value="coin_10dh">Piece 10 DH (diametre)</option>
+            </select>
+          </label>
+
+          <label>
+            Unite
+            <select id="unitSelect">
+              <option value="cm" selected>cm</option>
+              <option value="mm">mm</option>
+              <option value="m">m</option>
+              <option value="in">in</option>
+            </select>
+          </label>
+
+          <label>
+            Longueur reference
+            <input type="text" id="referenceInfo" value="5.398 cm" readonly />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="computeBtn" class="btn accent">Lancer la mesure</button>
+          <button id="clearAll" class="btn secondary" type="button">Reinitialiser</button>
+        </div>
+
+        <p id="stepHelp" class="help">
+          Clique 2 points pour la reference, puis 2 points pour la largeur et 2 points pour la longueur.
+        </p>
+      </section>
+
+      <section class="panel workspace reveal">
+        <div class="canvas-wrap">
+          <canvas id="measureCanvas" aria-label="Zone de mesure" role="img"></canvas>
+          <div id="placeholder" class="placeholder">Charge une image pour commencer</div>
+        </div>
+      </section>
+
+      <section class="panel result reveal">
+        <h2>Resultats</h2>
+        <div id="status" class="status">En attente d'image...</div>
+        <dl class="results-grid">
+          <div>
+            <dt>Largeur</dt>
+            <dd id="widthValue">-</dd>
+          </div>
+          <div>
+            <dt>Longueur</dt>
+            <dd id="lengthValue">-</dd>
+          </div>
+          <div>
+            <dt>Surface</dt>
+            <dd id="areaValue">-</dd>
+          </div>
+          <div>
+            <dt>Precision estimee</dt>
+            <dd id="precisionValue">-</dd>
+          </div>
+        </dl>
+        <p class="note" id="noteText">
+          Le resultat reste une estimation. Une photo nette et frontale reduit l'erreur.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <div id="cameraModal" class="camera-modal hidden" role="dialog" aria-modal="true">
+    <div class="camera-card">
+      <div class="camera-header">
+        <h3>Camera active</h3>
+        <button id="closeCameraBtn" class="btn secondary" type="button">Fermer</button>
+      </div>
+      <video id="cameraVideo" autoplay playsinline></video>
+      <div class="camera-actions">
+        <button id="captureBtn" class="btn accent" type="button">Prendre la photo</button>
+      </div>
+      <canvas id="cameraCanvas" class="hidden"></canvas>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
